@@ -26,6 +26,8 @@
                             <th>Customer</th>
                             <th>Service Type</th>
                             <th>Date & Time</th>
+                            <th>Charges</th>
+                            <th>Payment Status</th>
                             <th>Status</th>
                             <th>Assigned To</th>
                             <th>Actions</th>
@@ -38,6 +40,12 @@
                                 <td>{{ $booking->user->name }}</td>
                                 <td>{{ $booking->service_type }}</td>
                                 <td>{{ $booking->booking_date }} at {{ $booking->booking_time }}</td>
+                                <td>${{ $booking->service_price ?? 0 }}</td>
+                                <td>
+                                    <span class="badge bg-{{ $booking->payment_status == 'paid' ? 'success' : 'warning' }}">
+                                        {{ ucfirst($booking->payment_status ?? 'pending') }}
+                                    </span>
+                                </td>
                                 <td>
                                     <span class="badge bg-{{ $booking->status == 'Pending' ? 'warning' : ($booking->status == 'Confirmed' ? 'primary' : ($booking->status == 'Completed' ? 'success' : 'danger')) }}">
                                         {{ $booking->status }}
@@ -86,7 +94,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="6" class="text-center">No bookings found</td>
+                                <td colspan="8" class="text-center">No bookings found</td>
                             </tr>
                         @endforelse
                     </tbody>

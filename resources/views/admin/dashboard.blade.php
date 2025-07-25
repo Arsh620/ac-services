@@ -154,7 +154,7 @@
                                 <tr>
                                     <th class="border-0 fw-semibold">#ID</th>
                                     <th class="border-0 fw-semibold"><i class="bi bi-person me-1"></i>Customer</th>
-                                    <th class="border-0 fw-semibold"><i class="bi bi-tools me-1"></i>Service</th>
+                                    <th class="border-0 fw-semibold"><i class="bi bi-tools me-1"></i>Service & Price</th>
                                     <th class="border-0 fw-semibold"><i class="bi bi-calendar me-1"></i>Schedule</th>
                                     <th class="border-0 fw-semibold"><i class="bi bi-flag me-1"></i>Status</th>
                                     <th class="border-0 fw-semibold">Action</th>
@@ -173,7 +173,10 @@
                                         </div>
                                     </td>
                                     <td class="align-middle">
-                                        <span class="service-badge">{{ $booking->service_type }}</span>
+                                        <div>
+                                            <span class="service-badge">{{ $booking->service_type }}</span>
+                                            <div class="text-muted small">${{ $booking->service_price ?? 0 }}</div>
+                                        </div>
                                     </td>
                                     <td class="align-middle">
                                         <div class="schedule-info">

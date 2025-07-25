@@ -13,16 +13,24 @@
 
                         <div class="mb-3">
                             <label for="service_type" class="form-label">Service Type</label>
-                            <select id="service_type" name="service_type" class="form-select @error('service_type') is-invalid @enderror" required>
+                            <select id="service_type" name="service_type" class="form-select @error('service_type') is-invalid @enderror" required onchange="updatePrice()">
                                 <option value="">Select Service Type</option>
-                                <option value="Installation">AC Installation</option>
-                                <option value="Repair">AC Repair</option>
-                                <option value="Maintenance">AC Maintenance</option>
-                                <option value="Cleaning">AC Cleaning</option>
+                                @foreach(\App\Models\Service::all() as $service)
+                                    <option value="{{ $service->name }}" data-price="{{ $service->price }}">
+                                        {{ $service->name }} - ${{ $service->price }}
+                                    </option>
+                                @endforeach
                             </select>
                             @error('service_type')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="alert alert-info" id="price-display" style="display: none;">
+                                <strong>Service Price: $<span id="selected-price">0</span></strong>
+                            </div>
+                            <input type="hidden" name="service_price" id="service_price" value="0">
                         </div>
 
                         <div class="mb-3">
@@ -69,4 +77,22 @@
         </div>
     </div>
 </div>
+
+<script>
+function updatePrice() {
+    const select = document.getElementById('service_type');
+    const selectedOption = select.options[select.selectedIndex];
+    const price = selectedOption.getAttribute('data-price') || 0;
+    
+    document.getElementById('selected-price').textContent = price;
+    document.getElementById('service_price').value = price;
+    
+    const priceDisplay = document.getElementById('price-display');
+    if (price > 0) {
+        priceDisplay.style.display = 'block';
+    } else {
+        priceDisplay.style.display = 'none';
+    }
+}
+</script>
 @endsection

@@ -14,6 +14,9 @@ class Booking extends Model
         'user_id',
         'assigned_to',
         'service_type',
+        'service_price',
+        'payment_status',
+        'payment_method',
         'booking_date',
         'booking_time',
         'address',
@@ -28,5 +31,10 @@ class Booking extends Model
     public function assignedEmployee()
     {
         return $this->belongsTo(User::class, 'assigned_to');
+    }
+    
+    public function payment()
+    {
+        return $this->hasOne(Payment::class);
     }
 }

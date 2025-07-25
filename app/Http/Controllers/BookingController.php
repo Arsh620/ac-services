@@ -32,6 +32,7 @@ class BookingController extends Controller
     {
         $validated = $request->validate([
             'service_type' => 'required|string',
+            'service_price' => 'required|numeric|min:0',
             'booking_date' => 'required|date',
             'booking_time' => 'required',
             'address' => 'required|string',
@@ -40,6 +41,8 @@ class BookingController extends Controller
         $booking = new Booking();
         $booking->user_id = Auth::id();
         $booking->service_type = $validated['service_type'];
+        $booking->service_price = $validated['service_price'];
+        $booking->payment_status = 'pending';
         $booking->booking_date = $validated['booking_date'];
         $booking->booking_time = $validated['booking_time'];
         $booking->address = $validated['address'];

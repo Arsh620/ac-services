@@ -34,9 +34,55 @@
                         <p>{{ $booking->address }}</p>
                     </div>
 
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <p><strong>Service Charge:</strong> ${{ $booking->service_price ?? 0 }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Payment Status:</strong> 
+                                <span class="badge bg-{{ $booking->payment_status == 'paid' ? 'success' : 'warning' }}">
+                                    {{ ucfirst($booking->payment_status ?? 'pending') }}
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+
+                    @if($booking->payment_status == 'paid' && $booking->payment)
+                        <div class="card mb-3 border-success">
+                            <div class="card-header bg-success text-white">
+                                <h6 class="mb-0"><i class="bi bi-receipt me-2"></i>Payment Details</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p><strong>Transaction ID:</strong> {{ $booking->payment->transaction_id }}</p>
+                                        <p><strong>Payment Method:</strong> {{ ucfirst($booking->payment->payment_method) }}</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p><strong>Amount Paid:</strong> ${{ $booking->payment->amount }}</p>
+                                        <p><strong>Payment Date:</strong> {{ $booking->payment->created_at->format('M d, Y H:i A') }}</p>
+                                    </div>
+                                </div>
+                                <div class="text-center mt-3">
+                                    <a href="{{ route('payments.receipt', $booking->payment) }}" class="btn btn-primary">
+                                        <i class="bi bi-receipt me-1"></i>View Receipt
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+
                     <div class="mb-3">
                         <p><strong>Booking Created:</strong> {{ $booking->created_at->format('F j, Y, g:i a') }}</p>
                     </div>
+
+                    @if($booking->payment_status == 'pending')
+                        <div class="text-center">
+                            <a href="{{ route('payments.show', $booking) }}" class="btn btn-success btn-lg">
+                                <i class="bi bi-credit-card me-2"></i>Make Payment
+                            </a>
+                        </div>
+                    @endif
 
                     @if($booking->status == 'Pending')
                         <div class="alert alert-info">

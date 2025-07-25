@@ -23,6 +23,8 @@
                                 <th>Service Type</th>
                                 <th>Date</th>
                                 <th>Time</th>
+                                <th>Charges</th>
+                                <th>Payment Status</th>
                                 <th>Status</th>
                                 <th>Actions</th>
                             </tr>
@@ -33,13 +35,22 @@
                                     <td>{{ $booking->service_type }}</td>
                                     <td>{{ $booking->booking_date }}</td>
                                     <td>{{ $booking->booking_time }}</td>
+                                    <td>${{ $booking->service_price ?? 0 }}</td>
+                                    <td>
+                                        <span class="badge bg-{{ $booking->payment_status == 'paid' ? 'success' : 'warning' }}">
+                                            {{ ucfirst($booking->payment_status ?? 'pending') }}
+                                        </span>
+                                    </td>
                                     <td>
                                         <span class="badge bg-{{ $booking->status == 'Pending' ? 'warning' : ($booking->status == 'Confirmed' ? 'primary' : 'success') }}">
                                             {{ $booking->status }}
                                         </span>
                                     </td>
                                     <td>
-                                        <a href="{{ route('bookings.show', $booking) }}" class="btn btn-sm btn-info">View</a>
+                                        <a href="{{ route('bookings.show', $booking) }}" class="btn btn-sm btn-info me-1">View</a>
+                                        @if($booking->payment_status == 'pending')
+                                            <a href="{{ route('payments.show', $booking) }}" class="btn btn-sm btn-success">Pay</a>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

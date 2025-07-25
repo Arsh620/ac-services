@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\SetupController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\BookingAssignmentController;
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,6 +63,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/bookings/create', [BookingController::class, 'create'])->name('bookings.create');
     Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
     Route::get('/bookings/{booking}', [BookingController::class, 'show'])->name('bookings.show');
+    
+    // Payment routes
+    Route::get('/payments/{booking}', [PaymentController::class, 'show'])->name('payments.show');
+    Route::post('/payments/{booking}', [PaymentController::class, 'process'])->name('payments.process');
+    Route::get('/receipts/{payment}', [PaymentController::class, 'receipt'])->name('payments.receipt');
 });
 
 // Admin Routes
