@@ -12,6 +12,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\BookingAssignmentController;
 use App\Http\Controllers\PaymentController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -65,9 +66,13 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/bookings/{booking}', [BookingController::class, 'show'])->name('bookings.show');
     
     // Payment routes
+    Route::post('/payments/verify-razorpay', [PaymentController::class, 'verifyRazorpay'])->name('payments.verify-razorpay');
     Route::get('/payments/{booking}', [PaymentController::class, 'show'])->name('payments.show');
     Route::post('/payments/{booking}', [PaymentController::class, 'process'])->name('payments.process');
+    Route::get('/payments/{booking}/razorpay', [PaymentController::class, 'razorpay'])->name('payments.razorpay');
     Route::get('/receipts/{payment}', [PaymentController::class, 'receipt'])->name('payments.receipt');
+    
+
 });
 
 // Admin Routes
@@ -75,6 +80,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/bookings', [AdminController::class, 'bookings'])->name('admin.bookings');
     Route::patch('/bookings/{booking}/status', [AdminController::class, 'updateStatus'])->name('admin.bookings.update-status');
+
     
     // User management
     Route::get('/users', [AdminUserController::class, 'index'])->name('admin.users');

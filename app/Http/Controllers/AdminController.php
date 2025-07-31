@@ -81,4 +81,6 @@ class AdminController extends Controller
         // Web request
         return back()->with('success', 'Booking status updated successfully');
     }
+    
+
 }

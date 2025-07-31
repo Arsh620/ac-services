@@ -19,7 +19,7 @@
                         <strong>Amount:</strong> <span class="h4 text-success">${{ $booking->service_price }}</span>
                     </div>
 
-                    <form method="POST" action="{{ route('payments.process', $booking) }}">
+                    <form method="POST" action="{{ route('payments.process', $booking) }}" onsubmit="console.log('Form submitted with method:', document.querySelector('input[name=payment_method]:checked').value)">
                         @csrf
                         <div class="mb-3">
                             <label class="form-label">Payment Method</label>
@@ -44,7 +44,7 @@
                         </div>
 
                         <div class="d-grid">
-                            <button type="submit" class="btn btn-success">
+                            <button type="submit" class="btn btn-success" onclick="console.log('Button clicked')">
                                 <i class="bi bi-check-circle me-2"></i>Complete Payment
                             </button>
                         </div>

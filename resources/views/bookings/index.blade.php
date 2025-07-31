@@ -49,7 +49,11 @@
                                     <td>
                                         <a href="{{ route('bookings.show', $booking) }}" class="btn btn-sm btn-info me-1">View</a>
                                         @if($booking->payment_status == 'pending')
-                                            <a href="{{ route('payments.show', $booking) }}" class="btn btn-sm btn-success">Pay</a>
+                                            @if($booking->payment_status == 'pending')
+                                                <a href="{{ route('payments.show', $booking) }}" class="btn btn-sm btn-success">Pay</a>
+                                            @else
+                                                <span class="badge bg-success">Paid</span>
+                                            @endif
                                         @endif
                                     </td>
                                 </tr>

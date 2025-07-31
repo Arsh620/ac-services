@@ -48,7 +48,13 @@ class LoginController extends Controller
             
             // Web request - use session
             $request->session()->regenerate();
-            return redirect()->intended('/');
+            
+            // Redirect based on user role
+            if (Auth::user()->is_admin) {
+                return redirect()->intended(route('admin.dashboard'));
+            } else {
+                return redirect()->intended(route('dashboard'));
+            }
         }
 
         // API error response

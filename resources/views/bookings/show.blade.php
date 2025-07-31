@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.sidebar')
 
 @section('content')
 <div class="container py-4">
@@ -46,7 +46,7 @@
                             </p>
                         </div>
                     </div>
-
+                    
                     @if($booking->payment_status == 'paid' && $booking->payment)
                         <div class="card mb-3 border-success">
                             <div class="card-header bg-success text-white">
@@ -72,18 +72,24 @@
                         </div>
                     @endif
 
+
+
+
+                    
                     <div class="mb-3">
                         <p><strong>Booking Created:</strong> {{ $booking->created_at->format('F j, Y, g:i a') }}</p>
                     </div>
 
+
+
                     @if($booking->payment_status == 'pending')
-                        <div class="text-center">
+                        <div class="text-center mb-3">
                             <a href="{{ route('payments.show', $booking) }}" class="btn btn-success btn-lg">
                                 <i class="bi bi-credit-card me-2"></i>Make Payment
                             </a>
                         </div>
                     @endif
-
+                    
                     @if($booking->status == 'Pending')
                         <div class="alert alert-info">
                             <i class="bi bi-info-circle"></i> Your booking is pending confirmation. We will contact you shortly.
