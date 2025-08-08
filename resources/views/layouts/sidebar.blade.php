@@ -306,6 +306,7 @@
     </style>
 </head>
 <body>
+    @include('components.loader')
     <!-- Header -->
     <header class="main-header">
         <div class="header-content">

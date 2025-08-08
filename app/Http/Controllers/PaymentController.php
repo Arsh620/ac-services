@@ -9,11 +9,16 @@ use Razorpay\Api\Api;
 
 class PaymentController extends Controller
 {
-    private $razorpay;
-    
-    public function __construct()
+    private function getRazorpayApi()
     {
-        $this->razorpay = new Api(env('RAZORPAY_KEY_ID'), env('RAZORPAY_KEY_SECRET'));
+        $keyId = config('services.razorpay.key') ?: env('RAZORPAY_KEY_ID');
+        $keySecret = config('services.razorpay.secret') ?: env('RAZORPAY_KEY_SECRET');
+        
+        if (!$keyId || !$keySecret) {
+            throw new \Exception('Razorpay keys not configured');
+        }
+        
+        return new Api($keyId, $keySecret);
     }
     
     public function show(Booking $booking)
@@ -60,8 +65,8 @@ class PaymentController extends Controller
         
         try {
             // Debug: Check if keys exist
-            $keyId = env('RAZORPAY_KEY_ID');
-            $keySecret = env('RAZORPAY_KEY_SECRET');
+            $keyId = config('services.razorpay.key');
+            $keySecret = config('services.razorpay.secret');
             \Log::info('Razorpay keys debug', [
                 'key_id_value' => $keyId,
                 'key_secret_value' => $keySecret ? substr($keySecret, 0, 10) . '...' : null,
@@ -84,7 +89,8 @@ class PaymentController extends Controller
                 return back()->with('error', 'Invalid booking amount: $' . $booking->service_price);
             }
             
-            $order = $this->razorpay->order->create([
+            $razorpay = $this->getRazorpayApi();
+            $order = $razorpay->order->create([
                 'amount' => $amount, // Amount in paise
                 'currency' => 'INR',
                 'receipt' => 'booking_' . $booking->id . '_' . time(),
@@ -112,7 +118,8 @@ class PaymentController extends Controller
                 'razorpay_signature' => $request->razorpay_signature
             ];
             
-            $this->razorpay->utility->verifyPaymentSignature($attributes);
+            $razorpay = $this->getRazorpayApi();
+            $razorpay->utility->verifyPaymentSignature($attributes);
             
             $booking = Booking::find($request->booking_id);
             

@@ -42,20 +42,17 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="booking_time" class="form-label">Preferred Time</label>
-                            <select id="booking_time" name="booking_time" class="form-select @error('booking_time') is-invalid @enderror" required>
-                                <option value="">Select Time</option>
-                                <option value="09:00:00">9:00 AM</option>
-                                <option value="10:00:00">10:00 AM</option>
-                                <option value="11:00:00">11:00 AM</option>
-                                <option value="12:00:00">12:00 PM</option>
-                                <option value="13:00:00">1:00 PM</option>
-                                <option value="14:00:00">2:00 PM</option>
-                                <option value="15:00:00">3:00 PM</option>
-                                <option value="16:00:00">4:00 PM</option>
-                                <option value="17:00:00">5:00 PM</option>
-                            </select>
-                            @error('booking_time')
+                            <label for="mobile" class="form-label">Mobile Number</label>
+                            <input type="tel" class="form-control @error('mobile') is-invalid @enderror" id="mobile" name="mobile" required placeholder="Enter your mobile number">
+                            @error('mobile')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email (Optional)</label>
+                            <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Enter your email address">
+                            @error('email')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
@@ -67,10 +64,6 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        
-
-                        
-
 
                         <div class="d-grid gap-2">
                             <button type="submit" class="btn btn-primary">Book Service</button>

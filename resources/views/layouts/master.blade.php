@@ -36,6 +36,7 @@
 </head>
 
 <body>
+    @include('components.loader')
     @include('layouts.nav')
 
     <main>

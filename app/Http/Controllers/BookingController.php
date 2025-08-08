@@ -34,7 +34,8 @@ class BookingController extends Controller
             'service_type' => 'required|string',
             'service_price' => 'required|numeric|min:0',
             'booking_date' => 'required|date',
-            'booking_time' => 'required',
+            'mobile' => 'required|string|max:15',
+            'email' => 'nullable|email',
             'address' => 'required|string',
         ]);
 
@@ -44,7 +45,8 @@ class BookingController extends Controller
         $booking->service_price = $validated['service_price'];
         $booking->payment_status = 'pending';
         $booking->booking_date = $validated['booking_date'];
-        $booking->booking_time = $validated['booking_time'];
+        $booking->mobile = $validated['mobile'];
+        $booking->email = $validated['email'];
         $booking->address = $validated['address'];
         $booking->save();
 
