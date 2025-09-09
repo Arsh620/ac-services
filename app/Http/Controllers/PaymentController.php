@@ -65,8 +65,8 @@ class PaymentController extends Controller
         
         try {
             // Debug: Check if keys exist
-            $keyId = config('services.razorpay.key');
-            $keySecret = config('services.razorpay.secret');
+            $keyId = env('RAZORPAY_KEY_ID');
+            $keySecret = env('RAZORPAY_KEY_SECRET');
             \Log::info('Razorpay keys debug', [
                 'key_id_value' => $keyId,
                 'key_secret_value' => $keySecret ? substr($keySecret, 0, 10) . '...' : null,
