@@ -64,12 +64,17 @@ class PaymentController extends Controller
         \Log::info('Razorpay method called', ['booking_id' => $booking->id]);
         
         try {
-            // Debug: Check if keys exist
-            $keyId = env('RAZORPAY_KEY_ID');
-            $keySecret = env('RAZORPAY_KEY_SECRET');
+            // Debug: Check if keys exist from multiple sources
+            $keyId = config('services.razorpay.key');
+            $keySecret = config('services.razorpay.secret');
+            $envKeyId = env('RAZORPAY_KEY_ID');
+            $envKeySecret = env('RAZORPAY_KEY_SECRET');
+            
             \Log::info('Razorpay keys debug', [
-                'key_id_value' => $keyId,
-                'key_secret_value' => $keySecret ? substr($keySecret, 0, 10) . '...' : null,
+                'config_key_id' => $keyId,
+                'config_key_secret' => $keySecret ? substr($keySecret, 0, 10) . '...' : null,
+                'env_key_id' => $envKeyId,
+                'env_key_secret' => $envKeySecret ? substr($envKeySecret, 0, 10) . '...' : null,
                 'key_id_status' => $keyId ? 'present' : 'missing',
                 'key_secret_status' => $keySecret ? 'present' : 'missing'
             ]);

@@ -35,6 +35,11 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
+// School Landing Page
+Route::get('/school', function () {
+    return view('school.landing');
+})->name('school.landing');
+
 // Debug route
 Route::get('/debug', function () {
     return view('debug');
