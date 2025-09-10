@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pinnacle Academy - Government Educational Institution</title>
+    <title>Hudaibiya International School Ranchi - Educational Institution</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -400,6 +400,104 @@
             }
         }
 
+        /* Gallery Styles */
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 51, 102, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        /* News Cards */
+        .news-card {
+            background: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 30px;
+            height: 100%;
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--govt-blue);
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+        }
+
+        .news-date {
+            background: var(--govt-gold);
+            color: var(--govt-blue);
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .news-link {
+            color: var(--govt-blue);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .news-link:hover {
+            color: var(--govt-red);
+        }
+
         /* Accessibility */
         .sr-only {
             position: absolute;
@@ -445,7 +543,7 @@
                 <div class="govt-emblem me-2">
                     <i class="bi bi-mortarboard-fill"></i>
                 </div>
-                Pinnacle Academy
+                HUDAIBIYA INTERNATIONAL SCHOOL RANCHI
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -477,7 +575,7 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-8">
-                    <h1 class="hero-title">Pinnacle Academy</h1>
+                    <h1 class="hero-title">HUDAIBIYA INTERNATIONAL SCHOOL RANCHI</h1>
                     <p class="hero-subtitle">A Premier Government Educational Institution committed to Excellence, Integrity, and Innovation in Education</p>
                     <a href="#about" class="hero-cta">
                         <i class="bi bi-info-circle me-2"></i>
@@ -629,32 +727,218 @@
         </div>
     </section>
 
+    <!-- Admissions Section -->
+    <section id="admissions" class="section">
+        <div class="container">
+            <h2 class="section-title">Online Admission Form</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="about-card">
+                        <form id="admissionForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label" style="font-weight: 600; color: var(--govt-blue);">Student Name *</label>
+                                    <input type="text" class="form-control" required style="border: 2px solid #dee2e6; border-radius: 6px; padding: 12px;">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label" style="font-weight: 600; color: var(--govt-blue);">Father's Name *</label>
+                                    <input type="text" class="form-control" required style="border: 2px solid #dee2e6; border-radius: 6px; padding: 12px;">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label" style="font-weight: 600; color: var(--govt-blue);">Mother's Name *</label>
+                                    <input type="text" class="form-control" required style="border: 2px solid #dee2e6; border-radius: 6px; padding: 12px;">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label" style="font-weight: 600; color: var(--govt-blue);">Date of Birth *</label>
+                                    <input type="date" class="form-control" required style="border: 2px solid #dee2e6; border-radius: 6px; padding: 12px;">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label" style="font-weight: 600; color: var(--govt-blue);">Class Applying For *</label>
+                                    <select class="form-control" required style="border: 2px solid #dee2e6; border-radius: 6px; padding: 12px;">
+                                        <option value="">Select Class</option>
+                                        <option value="nursery">Nursery</option>
+                                        <option value="lkg">LKG</option>
+                                        <option value="ukg">UKG</option>
+                                        <option value="1">Class I</option>
+                                        <option value="2">Class II</option>
+                                        <option value="3">Class III</option>
+                                        <option value="4">Class IV</option>
+                                        <option value="5">Class V</option>
+                                        <option value="6">Class VI</option>
+                                        <option value="7">Class VII</option>
+                                        <option value="8">Class VIII</option>
+                                        <option value="9">Class IX</option>
+                                        <option value="10">Class X</option>
+                                        <option value="11">Class XI</option>
+                                        <option value="12">Class XII</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label" style="font-weight: 600; color: var(--govt-blue);">Gender *</label>
+                                    <select class="form-control" required style="border: 2px solid #dee2e6; border-radius: 6px; padding: 12px;">
+                                        <option value="">Select Gender</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label" style="font-weight: 600; color: var(--govt-blue);">Mobile Number *</label>
+                                    <input type="tel" class="form-control" required style="border: 2px solid #dee2e6; border-radius: 6px; padding: 12px;">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label" style="font-weight: 600; color: var(--govt-blue);">Email Address</label>
+                                    <input type="email" class="form-control" style="border: 2px solid #dee2e6; border-radius: 6px; padding: 12px;">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" style="font-weight: 600; color: var(--govt-blue);">Address *</label>
+                                <textarea class="form-control" rows="3" required style="border: 2px solid #dee2e6; border-radius: 6px; padding: 12px;"></textarea>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label" style="font-weight: 600; color: var(--govt-blue);">Previous School</label>
+                                    <input type="text" class="form-control" style="border: 2px solid #dee2e6; border-radius: 6px; padding: 12px;">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label" style="font-weight: 600; color: var(--govt-blue);">Last Class Passed</label>
+                                    <input type="text" class="form-control" style="border: 2px solid #dee2e6; border-radius: 6px; padding: 12px;">
+                                </div>
+                            </div>
+                            <div class="text-center mt-4">
+                                <button type="submit" style="background: var(--govt-blue); color: white; border: none; padding: 15px 40px; border-radius: 6px; font-weight: 600; font-size: 1.1rem;">
+                                    <i class="bi bi-send me-2"></i>Submit Application
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Statistics Section -->
     <section class="stats-section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-6">
                     <div class="stat-item">
-                        <div class="stat-number">5000+</div>
+                        <div class="stat-number" data-count="2847">2,847</div>
                         <div class="stat-label">Students Enrolled</div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <div class="stat-item">
-                        <div class="stat-number">95%</div>
+                        <div class="stat-number" data-count="98" data-suffix="%">98%</div>
                         <div class="stat-label">Pass Percentage</div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <div class="stat-item">
-                        <div class="stat-number">200+</div>
+                        <div class="stat-number" data-count="156">156</div>
                         <div class="stat-label">Qualified Faculty</div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <div class="stat-item">
-                        <div class="stat-number">50+</div>
+                        <div class="stat-number" data-count="25" data-suffix="+">25+</div>
                         <div class="stat-label">Years of Excellence</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="section about-section">
+        <div class="container">
+            <h2 class="section-title">School Gallery</h2>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="gallery-item" onclick="openModal('https://images.unsplash.com/photo-1580582932707-520aed937b7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+                        <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Classroom" class="img-fluid rounded" style="height: 250px; width: 100%; object-fit: cover; cursor: pointer; transition: transform 0.3s ease;">
+                        <div class="gallery-overlay">
+                            <i class="bi bi-zoom-in"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="gallery-item" onclick="openModal('https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+                        <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Library" class="img-fluid rounded" style="height: 250px; width: 100%; object-fit: cover; cursor: pointer; transition: transform 0.3s ease;">
+                        <div class="gallery-overlay">
+                            <i class="bi bi-zoom-in"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="gallery-item" onclick="openModal('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Sports" class="img-fluid rounded" style="height: 250px; width: 100%; object-fit: cover; cursor: pointer; transition: transform 0.3s ease;">
+                        <div class="gallery-overlay">
+                            <i class="bi bi-zoom-in"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="gallery-item" onclick="openModal('https://images.unsplash.com/photo-1497486751825-1233686d5d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+                        <img src="https://images.unsplash.com/photo-1497486751825-1233686d5d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Laboratory" class="img-fluid rounded" style="height: 250px; width: 100%; object-fit: cover; cursor: pointer; transition: transform 0.3s ease;">
+                        <div class="gallery-overlay">
+                            <i class="bi bi-zoom-in"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="gallery-item" onclick="openModal('https://images.unsplash.com/photo-1544717297-fa95b6ee9643?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+                        <img src="https://images.unsplash.com/photo-1544717297-fa95b6ee9643?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Auditorium" class="img-fluid rounded" style="height: 250px; width: 100%; object-fit: cover; cursor: pointer; transition: transform 0.3s ease;">
+                        <div class="gallery-overlay">
+                            <i class="bi bi-zoom-in"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="gallery-item" onclick="openModal('https://images.unsplash.com/photo-1581726690015-c9861fa5057f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+                        <img src="https://images.unsplash.com/photo-1581726690015-c9861fa5057f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Campus" class="img-fluid rounded" style="height: 250px; width: 100%; object-fit: cover; cursor: pointer; transition: transform 0.3s ease;">
+                        <div class="gallery-overlay">
+                            <i class="bi bi-zoom-in"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News & Events Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Latest News & Events</h2>
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="news-card">
+                        <div class="news-date">March 15, 2025</div>
+                        <h5>Annual Sports Day</h5>
+                        <p>Join us for our annual sports day celebration with various competitions and activities.</p>
+                        <a href="#" class="news-link">Read More <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="news-card">
+                        <div class="news-date">March 10, 2025</div>
+                        <h5>Science Exhibition</h5>
+                        <p>Students showcase their innovative science projects and experiments.</p>
+                        <a href="#" class="news-link">Read More <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="news-card">
+                        <div class="news-date">March 5, 2025</div>
+                        <h5>Parent-Teacher Meeting</h5>
+                        <p>Important meeting to discuss student progress and academic performance.</p>
+                        <a href="#" class="news-link">Read More <i class="bi bi-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -672,7 +956,7 @@
                             <i class="bi bi-geo-alt-fill"></i>
                         </div>
                         <h5>Postal Address</h5>
-                        <p>Pinnacle Academy<br>
+                        <p>Hudaibiya International School Ranchi<br>
                         123 Education Street<br>
                         Government Complex<br>
                         Learning City - 123456</p>
@@ -696,10 +980,10 @@
                             <i class="bi bi-envelope-fill"></i>
                         </div>
                         <h5>Email Addresses</h5>
-                        <p>General: info@pinnacleacademy.gov.in<br>
-                        Admission: admission@pinnacleacademy.gov.in<br>
-                        Principal: principal@pinnacleacademy.gov.in<br>
-                        Grievance: grievance@pinnacleacademy.gov.in</p>
+                        <p>General: info@hudaibiyaschool.edu.in<br>
+                        Admission: admission@hudaibiyaschool.edu.in<br>
+                        Principal: principal@hudaibiyaschool.edu.in<br>
+                        Grievance: grievance@hudaibiyaschool.edu.in</p>
                     </div>
                 </div>
             </div>
@@ -752,7 +1036,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Pinnacle Academy. All rights reserved. | Website designed and maintained by Government IT Department</p>
+                <p>&copy; 2025 Hudaibiya International School Ranchi. All rights reserved. | Website designed and maintained by Government IT Department</p>
                 <p class="mb-0">
                     <a href="#privacy" class="text-white">Privacy Policy</a> |
                     <a href="#terms" class="text-white">Terms of Use</a> |
@@ -763,8 +1047,80 @@
         </div>
     </footer>
 
+    <!-- Image Modal -->
+    <div id="imageModal" class="modal-overlay" onclick="closeModal()">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <img id="modalImage" class="img-fluid rounded" style="max-width: 100%; max-height: 100%;">
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        // Image Modal Functions
+        function openModal(imageSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.style.display = 'flex';
+            modalImg.src = imageSrc;
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+
+        // Form submission
+        document.getElementById('admissionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your application! We will contact you soon.');
+        });
+
+        // Stats counter animation
+        function animateValue(obj, start, end, duration) {
+            let startTimestamp = null;
+            const suffix = obj.getAttribute('data-suffix') || '';
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const value = Math.floor(progress * (end - start) + start);
+                obj.innerHTML = value.toLocaleString() + suffix;
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Trigger animations when page loads
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                const counters = document.querySelectorAll('.stat-number');
+                counters.forEach(counter => {
+                    const target = parseInt(counter.getAttribute('data-count'));
+                    animateValue(counter, 0, target, 3000);
+                });
+            }, 500);
+        });
+
+        // Also trigger on scroll to stats section
+        let animated = false;
+        window.addEventListener('scroll', function() {
+            if (!animated) {
+                const statsSection = document.querySelector('.stats-section');
+                if (statsSection) {
+                    const rect = statsSection.getBoundingClientRect();
+                    if (rect.top < window.innerHeight && rect.bottom > 0) {
+                        const counters = document.querySelectorAll('.stat-number');
+                        counters.forEach(counter => {
+                            const target = parseInt(counter.getAttribute('data-count'));
+                            animateValue(counter, 0, target, 3000);
+                        });
+                        animated = true;
+                    }
+                }
+            }
+        });
+
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
