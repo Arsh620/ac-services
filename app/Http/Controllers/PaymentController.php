@@ -11,11 +11,12 @@ class PaymentController extends Controller
 {
     private function getRazorpayApi()
     {
-        $keyId = config('services.razorpay.key') ?: env('RAZORPAY_KEY_ID');
-        $keySecret = config('services.razorpay.secret') ?: env('RAZORPAY_KEY_SECRET');
+        $keyId = env('RAZORPAY_KEY_ID');
+        $keySecret = env('RAZORPAY_KEY_SECRET');
         
-        if (!$keyId || !$keySecret) {
-            throw new \Exception('Razorpay keys not configured');
+        if (empty($keyId) || empty($keySecret)) {
+            \Log::error('Razorpay keys missing', ['key_id' => $keyId, 'secret' => $keySecret ? 'present' : 'missing']);
+            throw new \Exception('Razorpay keys not configured properly');
         }
         
         return new Api($keyId, $keySecret);
@@ -64,24 +65,12 @@ class PaymentController extends Controller
         \Log::info('Razorpay method called', ['booking_id' => $booking->id]);
         
         try {
-            // Debug: Check if keys exist from multiple sources
-            $keyId = config('services.razorpay.key');
-            $keySecret = config('services.razorpay.secret');
-            $envKeyId = env('RAZORPAY_KEY_ID');
-            $envKeySecret = env('RAZORPAY_KEY_SECRET');
+            $keyId = env('RAZORPAY_KEY_ID');
+            $keySecret = env('RAZORPAY_KEY_SECRET');
             
-            \Log::info('Razorpay keys debug', [
-                'config_key_id' => $keyId,
-                'config_key_secret' => $keySecret ? substr($keySecret, 0, 10) . '...' : null,
-                'env_key_id' => $envKeyId,
-                'env_key_secret' => $envKeySecret ? substr($envKeySecret, 0, 10) . '...' : null,
-                'key_id_status' => $keyId ? 'present' : 'missing',
-                'key_secret_status' => $keySecret ? 'present' : 'missing'
-            ]);
-            
-            if (!$keyId || !$keySecret) {
-                \Log::error('Razorpay keys not configured');
-                return back()->with('error', 'Razorpay keys not configured');
+            if (empty($keyId) || empty($keySecret)) {
+                \Log::error('Razorpay keys missing in razorpay method');
+                return back()->with('error', 'Payment configuration error');
             }
             
             // Debug: Check booking details
@@ -105,7 +94,8 @@ class PaymentController extends Controller
             // Debug: Log order creation
             \Log::info('Razorpay order created', ['order_id' => $order['id'], 'amount' => $amount]);
             
-            return view('payments.razorpay', compact('booking', 'order'));
+            $razorpayKey = $keyId;
+            return view('payments.razorpay', compact('booking', 'order', 'razorpayKey'));
             
         } catch (\Exception $e) {
             \Log::error('Razorpay order creation failed', ['error' => $e->getMessage()]);

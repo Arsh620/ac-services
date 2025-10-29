@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ApiTestController;
+use App\Http\Controllers\EPramaanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,12 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::post('/register', [RegisterController::class, 'register']);
 Route::get('/test', [ApiTestController::class, 'test']);
 
+
+Route::prefix('epramaan')->group(function () {
+    Route::get('/e-login', [EPramaanController::class, 'redirectToEPramaan'])->name('api.epramaan.login');
+    Route::get('/callback', [EPramaanController::class, 'handleCallback'])->name('api.epramaan.callback');
+});
+
 // Protected routes (authentication required)
 Route::middleware('auth:sanctum')->group(function () {
     // User routes
@@ -33,18 +40,18 @@ Route::middleware('auth:sanctum')->group(function () {
         return $request->user();
     });
     Route::get('/auth-test', [ApiTestController::class, 'authTest']);
-    
+
     // Booking routes
     Route::get('/bookings', [BookingController::class, 'index']);
     Route::post('/bookings', [BookingController::class, 'store']);
     Route::get('/bookings/{booking}', [BookingController::class, 'show']);
-    
+
     // Admin routes
     Route::middleware('admin')->prefix('admin')->group(function () {
         Route::get('/dashboard', [AdminController::class, 'dashboard']);
         Route::get('/bookings', [AdminController::class, 'bookings']);
         Route::patch('/bookings/{booking}/status', [AdminController::class, 'updateStatus']);
-        
+
         // User management
         Route::get('/users', [AdminUserController::class, 'index']);
         Route::patch('/users/{user}/admin-status', [AdminUserController::class, 'updateAdminStatus']);

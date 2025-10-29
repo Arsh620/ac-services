@@ -47,7 +47,7 @@
     document.getElementById('rzp-button').onclick = function(e) {
         @if(isset($order))
         var options = {
-            "key": "{{ env('RAZORPAY_KEY_ID') }}",
+            "key": "{{ $razorpayKey }}",
             "amount": "{{ $order['amount'] }}",
             "currency": "{{ $order['currency'] }}",
             "name": "AC Service Booking",

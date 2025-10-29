@@ -555,6 +555,11 @@
                     <li class="nav-item"><a class="nav-link" href="#programs">Academic Programs</a></li>
                     <li class="nav-item"><a class="nav-link" href="#admissions">Admissions</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('epramaan.web.login') }}" style="background: var(--govt-green); color: white !important; border-radius: 20px; padding: 8px 20px !important; margin-left: 10px;">
+                            <i class="bi bi-shield-check me-1"></i>ePramaan Login
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -577,10 +582,16 @@
                 <div class="col-lg-8">
                     <h1 class="hero-title">HUDAIBIYA INTERNATIONAL SCHOOL RANCHI</h1>
                     <p class="hero-subtitle">A Premier Government Educational Institution committed to Excellence, Integrity, and Innovation in Education</p>
-                    <a href="#about" class="hero-cta">
-                        <i class="bi bi-info-circle me-2"></i>
-                        Learn More About Our Institution
-                    </a>
+                    <div class="d-flex gap-3 justify-content-center flex-wrap">
+                        <a href="#about" class="hero-cta">
+                            <i class="bi bi-info-circle me-2"></i>
+                            Learn More About Our Institution
+                        </a>
+                        <a href="{{ route('epramaan.web.login') }}" class="hero-cta" style="background: var(--govt-green); color: white;">
+                            <i class="bi bi-shield-check me-2"></i>
+                            Login with ePramaan
+                        </a>
+                    </div>
                 </div>
                 <div class="col-lg-4">
                     <img src="https://lh3.googleusercontent.com/gps-cs-s/AC9h4no6l_k_1S4lNpB1jbicudYjy921Takqos2cjvS2eD89QBZO1v1loFbevvDRk4fK2krbkhZlR01yONw1UHutueeXsh_15z4iQ-VcxxlTV1fE222ZgpIBUwPmHt0oi9F1dIUTGEl9=s1360-w1360-h1020-rw" alt="School Building" class="img-fluid rounded shadow-lg" style="border: 3px solid var(--govt-gold);">

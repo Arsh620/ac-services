@@ -11,6 +11,8 @@ use App\Http\Controllers\SetupController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\BookingAssignmentController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\SchoolController;
+use App\Http\Controllers\EPramaanController;
 
 
 /*
@@ -35,10 +37,18 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-// School Landing Page
-Route::get('/school', function () {
-    return view('school.landing');
-})->name('school.landing');
+// School Routes
+Route::prefix('school')->group(function () {
+    Route::get('/', [SchoolController::class, 'landing'])->name('school.landing');
+    Route::get('/login', [SchoolController::class, 'login'])->name('school.login');
+    Route::get('/dashboard', [SchoolController::class, 'dashboard'])->middleware('auth')->name('school.dashboard');
+});
+
+// ePramaan Web Routes
+Route::prefix('epramaan')->group(function () {
+    Route::get('/login', [EPramaanController::class, 'webRedirectToEPramaan'])->name('epramaan.web.login');
+    Route::get('/callback', [EPramaanController::class, 'webHandleCallback'])->name('epramaan.web.callback');
+});
 
 // Debug route
 Route::get('/debug', function () {
