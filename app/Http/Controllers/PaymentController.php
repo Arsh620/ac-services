@@ -65,8 +65,8 @@ class PaymentController extends Controller
         \Log::info('Razorpay method called', ['booking_id' => $booking->id]);
         
         try {
-            $keyId = env('RAZORPAY_KEY_ID');
-            $keySecret = env('RAZORPAY_KEY_SECRET');
+            $keyId = config('services.razorpay.key');
+            $keySecret = config('services.razorpay.secret');
             
             if (empty($keyId) || empty($keySecret)) {
                 \Log::error('Razorpay keys missing in razorpay method');
