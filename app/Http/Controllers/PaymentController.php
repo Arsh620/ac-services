@@ -11,8 +11,8 @@ class PaymentController extends Controller
 {
     private function getRazorpayApi()
     {
-        $keyId = env('RAZORPAY_KEY_ID');
-        $keySecret = env('RAZORPAY_KEY_SECRET');
+        $keyId = config('services.razorpay.key');
+        $keySecret =  config('services.razorpay.secret');
         
         if (empty($keyId) || empty($keySecret)) {
             \Log::error('Razorpay keys missing', ['key_id' => $keyId, 'secret' => $keySecret ? 'present' : 'missing']);
